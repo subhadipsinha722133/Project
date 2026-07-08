@@ -1,0 +1,388 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi there", "How are you", "Is anyone there?", "Hey", "Hola", "Hello", "Good day", "Good morning", "Good afternoon"],
+      "responses": ["Hello! I'm here to help with diabetes information and risk assessment", "Hi there! Ready to learn about diabetes prevention?", "Hello! Let's talk about diabetes awareness and management"],
+      "context": [""]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting to you, bye", "Till next time", "Exit", "Quit"],
+      "responses": ["Stay healthy! Remember to monitor your sugar levels regularly", "Goodbye! Take care of your health - prevention is key", "See you! Regular check-ups are important for diabetes management"],
+      "context": [""]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me", "Appreciate it"],
+      "responses": ["Happy to help with your diabetes questions!", "Any time! Your health is important", "My pleasure! Knowledge is power in diabetes management"],
+      "context": [""]
+    },
+    {
+      "tag": "noanswer",
+      "patterns": [],
+      "responses": ["Sorry, I didn't understand that. I can help with diabetes information and risk assessment", "Please ask about diabetes causes, prevention, or risk assessment", "Could you rephrase? I specialize in diabetes education and risk evaluation"],
+      "context": [""]
+    },
+    {
+      "tag": "options",
+      "patterns": ["What can you do?", "How can you help me?", "What services do you offer?", "Tell me about diabetes", "How does this work?"],
+      "responses": ["I provide diabetes education, risk assessment, prevention tips, management strategies, and information about causes and treatments", "I help with diabetes awareness, risk prediction using health metrics, and lifestyle guidance for prevention and management"],
+      "context": [""]
+    },
+    {
+      "tag": "what_is_diabetes",
+      "patterns": ["What is diabetes?", "Define diabetes", "Explain diabetes", "What does diabetes mean?", "Diabetes definition"],
+      "responses": ["Diabetes is a chronic health condition that affects how your body turns food into energy. There are three main types: Type 1, Type 2, and gestational diabetes. It occurs when your blood glucose (blood sugar) is too high."],
+      "context": [""]
+    },
+    {
+      "tag": "causes_diabetes",
+      "patterns": ["What causes diabetes?", "Why does diabetes occur?", "How do people get diabetes?", "Reasons for diabetes", "Diabetes causes"],
+      "responses": ["Type 1 diabetes: Autoimmune reaction where body attacks insulin-producing cells\nType 2 diabetes: Insulin resistance often due to lifestyle factors\nGestational diabetes: Hormonal changes during pregnancy\nRisk factors include genetics, obesity, sedentary lifestyle, poor diet, age, and ethnicity"],
+      "context": [""]
+    },
+    {
+      "tag": "type1_vs_type2",
+      "patterns": ["Difference between type 1 and type 2", "Type 1 vs type 2", "Compare diabetes types", "What's the difference between type 1 and 2?"],
+      "responses": ["Type 1: Autoimmune condition, usually develops in childhood, body produces little/no insulin\nType 2: Metabolic disorder, typically adult-onset, body becomes resistant to insulin\nType 1 requires insulin therapy, while Type 2 can often be managed with lifestyle changes and oral medications"],
+      "context": [""]
+    },
+    {
+      "tag": "prevention",
+      "patterns": ["How to prevent diabetes?", "Diabetes prevention", "Avoid diabetes", "Reduce diabetes risk", "Prevent type 2 diabetes"],
+      "responses": ["Maintain healthy weight, Exercise regularly (150 mins/week), Eat balanced diet (fiber-rich, low sugar), Limit processed foods, Avoid sugary drinks, Don't smoke, Regular health check-ups, Manage stress, Get quality sleep"],
+      "context": [""]
+    },
+    {
+      "tag": "symptoms",
+      "patterns": ["Diabetes symptoms", "Signs of diabetes", "How do I know if I have diabetes?", "What are diabetes symptoms?", "Early warning signs"],
+      "responses": ["Common symptoms: Frequent urination, Excessive thirst, Unexplained weight loss, Extreme hunger, Fatigue, Blurred vision, Slow-healing wounds, Tingling in hands/feet, Recurrent infections. Many people have no symptoms initially, especially with Type 2."],
+      "context": [""]
+    },
+    {
+      "tag": "diagnosis",
+      "patterns": ["How is diabetes diagnosed?", "Diabetes tests", "Diagnosing diabetes", "Blood sugar tests", "A1C test"],
+      "responses": ["Fasting blood sugar test (126 mg/dL or higher)\nA1C test (6.5% or higher)\nOral glucose tolerance test (200 mg/dL or higher)\nRandom blood sugar test (200 mg/dL or higher with symptoms)\nTesting should be confirmed with a second test unless symptoms are obvious."],
+      "context": [""]
+    },
+    {
+      "tag": "treatment",
+      "patterns": ["Diabetes treatment", "How to treat diabetes?", "Diabetes management", "Diabetes control"],
+      "responses": ["Type 1: Insulin therapy, blood sugar monitoring, carbohydrate counting\nType 2: Lifestyle changes, oral medications, sometimes insulin\nBoth types: Regular monitoring, healthy diet, physical activity, weight management, stress reduction\nNew treatments: Continuous glucose monitors, insulin pumps, GLP-1 receptor agonists"],
+      "context": [""]
+    },
+    {
+      "tag": "diet_recommendations",
+      "patterns": ["Diabetes diet", "What to eat with diabetes?", "Foods for diabetics", "Diabetes nutrition", "Meal planning for diabetes"],
+      "responses": ["Choose high-fiber foods (vegetables, fruits, whole grains)\nLean proteins (fish, poultry, legumes)\nHealthy fats (avocado, nuts, olive oil)\nLimit: refined carbs, sugary foods, processed foods\nPortion control, regular meal timing\nConsider working with a dietitian for personalized plans"],
+      "context": [""]
+    },
+    {
+      "tag": "complications",
+      "patterns": ["Diabetes complications", "Risks of diabetes", "Long-term effects", "What happens if diabetes is untreated?"],
+      "responses": ["Heart disease and stroke, Kidney damage (nephropathy), Nerve damage (neuropathy), Eye damage (retinopathy), Foot problems, Skin conditions, Hearing impairment, Alzheimer's disease, Depression\nGood blood sugar control significantly reduces complication risks."],
+      "context": [""]
+    },
+    {
+      "tag": "start_assessment",
+      "patterns": ["I want to check diabetes risk", "Start diabetes prediction", "Assess my diabetes risk", "Begin risk assessment", "Check for diabetes", "Predict diabetes"],
+      "responses": ["Let's start your diabetes risk assessment. Please provide your age:"],
+      "context": ["collect_age"]
+    },
+    {
+      "tag": "collect_age",
+      "patterns": [],
+      "responses": ["Thank you. Now please provide your BMI (Body Mass Index). If you don't know it, provide your height and weight:"],
+      "context": ["collect_bmi"]
+    },
+    {
+      "tag": "collect_bmi",
+      "patterns": [],
+      "responses": ["Great. What is your fasting glucose level (mg/dL)?"],
+      "context": ["collect_glucose"]
+    },
+    {
+      "tag": "collect_glucose",
+      "patterns": [],
+      "responses": ["Do you have a family history of diabetes? (yes/no)"],
+      "context": ["collect_family_history"]
+    },
+    {
+      "tag": "collect_family_history",
+      "patterns": [],
+      "responses": ["What is your blood pressure level? (e.g., 120/80)"],
+      "context": ["collect_blood_pressure"]
+    },
+    {
+      "tag": "collect_blood_pressure",
+      "patterns": [],
+      "responses": ["Do you exercise regularly? (yes/no)"],
+      "context": ["collect_exercise"]
+    },
+    {
+      "tag": "collect_exercise",
+      "patterns": [],
+      "responses": ["Calculating your diabetes risk... Based on your inputs, your risk level is: [result]. Would you like personalized prevention tips?"],
+      "context": ["provide_results"]
+    },
+    {
+      "tag": "reversal_possible",
+      "patterns": ["Can diabetes be reversed?", "Cure for diabetes", "Reverse type 2 diabetes", "Diabetes remission"],
+      "responses": ["Type 2 diabetes can often be put into remission through significant weight loss, dietary changes, and exercise. Some people can achieve normal blood sugar levels without medication. Type 1 diabetes cannot be reversed as it's an autoimmune condition, but it can be well-managed."],
+      "context": [""]
+    },
+    {
+      "tag": "emergency",
+      "patterns": ["High sugar emergency", "Diabetes emergency", "Urgent help", "Medical emergency", "Need doctor now", "Hypoglycemia", "Hyperglycemia"],
+      "responses": ["⚠️ If you're experiencing a medical emergency, please call emergency services immediately. For hyperglycemia (high blood sugar): watch for excessive thirst, frequent urination. For hypoglycemia (low blood sugar): consume fast-acting sugar. This chatbot is for informational purposes only."],
+      "context": [""]
+    },
+    {
+      "tag": "new_research",
+      "patterns": ["New diabetes treatments", "Latest diabetes research", "Diabetes breakthroughs", "Recent advances"],
+      "responses": ["Recent advances include: Artificial pancreas systems, Smart insulin that activates when needed, Stem cell research for beta cell regeneration, New medications with cardiovascular benefits, Improved continuous glucose monitors, Gene therapy research, Gut microbiome studies for metabolic health"],
+      "context": [""]
+    },
+    {
+      "tag": "mental_health",
+      "patterns": ["Diabetes and depression", "Mental health with diabetes", "Diabetes burnout", "Emotional aspects"],
+      "responses": ["Diabetes distress is common. Managing a chronic condition can lead to anxiety, depression, and burnout. Strategies include: Seeking support groups, Talking to a mental health professional, Practicing stress reduction techniques, Setting realistic goals, Celebrating small victories in management"],
+      "context": [""]
+    },
+    {
+      "tag": "results_high_risk",
+      "patterns": [],
+      "responses": ["Your assessment suggests high diabetes risk. Please consult a healthcare professional for proper screening. Consider: Weight management, Dietary changes, Regular exercise, Blood pressure control, Regular monitoring. Early intervention can prevent or delay onset."],
+      "context": [""]
+    },
+    {
+      "tag": "results_medium_risk",
+      "patterns": [],
+      "responses": ["You have moderate diabetes risk. Lifestyle modifications can significantly reduce your risk: Aim for 150 mins exercise weekly, Increase fiber intake, Reduce sugar and processed foods, Maintain healthy weight, Get annual check-ups."],
+      "context": [""]
+    },
+    {
+      "tag": "results_low_risk",
+      "patterns": [],
+      "responses": ["Your diabetes risk appears low. Maintain healthy habits: Balanced diet, Regular physical activity, Healthy weight, Limited alcohol, No smoking. Continue regular health screenings as risk increases with age."],
+      "context": [""]
+    },
+    {
+      "tag": "disclaimer",
+      "patterns": ["Is this accurate?", "Medical advice", "Doctor replacement", "Can I trust this prediction?"],
+      "responses": ["⚠️ Disclaimer: This is an educational tool, not a medical diagnosis. Always consult healthcare professionals for medical advice. Results are estimates based on provided information. This chatbot does not replace professional medical care."],
+      "context": [""]
+    },
+    {
+      "tag": "support_resources",
+      "patterns": ["Diabetes organizations", "Support groups", "Diabetes resources", "Where to find help"],
+      "responses": ["American Diabetes Association (ADA), JDRF (formerly Juvenile Diabetes Research Foundation), Diabetes UK, International Diabetes Federation, Local support groups, Certified Diabetes Educators, Endocrinologists, Registered dietitians specializing in diabetes care"],
+      "context": [""]
+    },
+    {
+      "tag": "technology",
+      "patterns": ["Diabetes technology", "CGMs", "Insulin pumps", "Apps for diabetes", "Digital health diabetes"],
+      "responses": ["Continuous Glucose Monitors (CGMs), Insulin pumps and pod systems, Smart insulin pens, Hybrid closed-loop systems (artificial pancreas), Mobile apps for tracking, Telemedicine for diabetes care, Data sharing platforms for healthcare providers"],
+      "context": [""]
+    },
+    {
+      "tag": "pregnancy",
+      "patterns": ["Gestational diabetes", "Diabetes and pregnancy", "Pregnancy with diabetes", "Blood sugar during pregnancy"],
+      "responses": ["Gestational diabetes develops during pregnancy and usually resolves after delivery. Management includes: Blood sugar monitoring, Medical nutrition therapy, Physical activity, Sometimes medication. Important to control for health of both mother and baby. Increases future Type 2 diabetes risk."],
+      "context": [""]
+    },
+    {
+      "tag": "children_diabetes",
+      "patterns": ["Diabetes in children", "Kids with diabetes", "Childhood diabetes", "Type 1 in children"],
+      "responses": ["Type 1 diabetes is more common in children, but Type 2 is increasing due to obesity rates. Signs in children: Increased thirst/hunger, Weight loss, Fatigue, Bedwetting, Mood changes. Management requires family involvement, education, and support for school management."],
+      "context": [""]
+    },
+    {
+      "tag": "insulin_types",
+      "patterns": ["Types of insulin", "Insulin varieties", "Different insulin", "Insulin medications", "What insulin to use"],
+      "responses": ["Rapid-acting: Humalog, Novolog (15-30 mins onset)\nShort-acting: Regular insulin (30-60 mins onset)\nIntermediate-acting: NPH insulin (1-3 hours onset)\nLong-acting: Lantus, Levemir (1-6 hours onset)\nUltra long-acting: Tresiba, Toujeo (6 hours onset, 36+ hours duration)\nConsult your doctor for the right type for you."],
+      "context": [""]
+    },
+    {
+      "tag": "blood_sugar_levels",
+      "patterns": ["Normal blood sugar", "Blood glucose ranges", "Target blood sugar", "What should my sugar be", "Blood sugar goals"],
+      "responses": ["Normal ranges:\nFasting: 70-100 mg/dL\nAfter meals (2 hours): <140 mg/dL\nA1C: <5.7%\n\nDiabetes targets (may vary):\nBefore meals: 80-130 mg/dL\nAfter meals: <180 mg/dL\nA1C: <7% (individualized)\n\nAlways follow your doctor's specific targets."],
+      "context": [""]
+    },
+    {
+      "tag": "carb_counting",
+      "patterns": ["Carbohydrate counting", "How to count carbs", "Carb counting diabetes", "Insulin carb ratio", "Carbs and blood sugar"],
+      "responses": ["Carb counting helps match insulin to food intake. Steps: Learn carb content of foods, Read nutrition labels, Use measuring tools, Keep food diary, Work with dietitian to determine insulin-to-carb ratio. Generally 15g carbs = 1 carb serving. Apps like MyFitnessPal can help track."],
+      "context": [""]
+    },
+    {
+      "tag": "exercise_diabetes",
+      "patterns": ["Exercise with diabetes", "Diabetes and workout", "Physical activity diabetes", "Sports with diabetes", "Fitness for diabetics"],
+      "responses": ["Benefits: Improves insulin sensitivity, lowers blood sugar, aids weight management, reduces heart disease risk. Tips: Check blood sugar before/after exercise, Carry glucose tablets, Stay hydrated, Wear medical ID, Start slowly, Monitor for hypoglycemia. Both aerobic and resistance training are beneficial."],
+      "context": [""]
+    },
+    {
+      "tag": "travel_diabetes",
+      "patterns": ["Traveling with diabetes", "Diabetes travel tips", "Flying with insulin", "Vacation diabetes management", "Travel supplies diabetes"],
+      "responses": ["Pack extra supplies in carry-on, Bring prescription letters, Adjust for time zones gradually, Research medical facilities at destination, Carry glucose tablets, Keep medications cool, Wear medical ID, Plan for delays, Bring snacks, Consider travel insurance that covers diabetes."],
+      "context": [""]
+    },
+    {
+      "tag": "workplace_diabetes",
+      "patterns": ["Diabetes at work", "Managing diabetes job", "Workplace accommodations", "Diabetes discrimination", "Work breaks diabetes"],
+      "responses": ["Know your rights under ADA (Americans with Disabilities Act), Request reasonable accommodations: flexible breaks for testing/eating, refrigerator access, private testing space. Keep supplies at work, Educate trusted colleagues, Plan for emergencies, Maintain consistent meal schedule when possible."],
+      "context": [""]
+    },
+    {
+      "tag": "school_diabetes",
+      "patterns": ["Diabetes at school", "Child diabetes school", "504 plan diabetes", "School nurse diabetes", "Diabetes management school"],
+      "responses": ["Develop 504 Plan or IEP with school, Train school staff on diabetes management, Provide emergency supplies to school, Plan for field trips and sports, Coordinate with school nurse, Educate child's teacher about symptoms, Ensure access to snacks and bathroom, Regular communication with staff."],
+      "context": [""]
+    },
+    {
+      "tag": "driving_diabetes",
+      "patterns": ["Driving with diabetes", "Diabetes driving safety", "License diabetes", "Hypoglycemia driving", "Blood sugar driving"],
+      "responses": ["Check blood sugar before driving, Don't drive if <70 mg/dL or >300 mg/dL, Keep glucose tablets in car, Pull over if experiencing low blood sugar, Wait 15 mins after treating low, Some regions require medical clearance, Consider continuous glucose monitor alerts, Plan for long trips with testing breaks."],
+      "context": [""]
+    },
+    {
+      "tag": "sick_day_management",
+      "patterns": ["Diabetes when sick", "Sick day rules", "Illness and blood sugar", "Diabetes flu", "Managing diabetes sickness"],
+      "responses": ["Continue medications even if not eating, Check blood sugar more frequently, Test for ketones (Type 1), Stay hydrated, Have sick-day action plan, Contact doctor if: persistent vomiting, high ketones, blood sugar >250 mg/dL repeatedly, signs of dehydration. Keep sick-day supplies ready."],
+      "context": [""]
+    },
+    {
+      "tag": "foot_care",
+      "patterns": ["Diabetic foot care", "Diabetes feet problems", "Foot complications diabetes", "Diabetic neuropathy feet", "Foot ulcers diabetes"],
+      "responses": ["Daily foot inspection, Wash and dry thoroughly, Moisturize (not between toes), Trim nails carefully, Wear proper fitting shoes, Never go barefoot, Check shoes before wearing, See podiatrist regularly, Report cuts/sores immediately. Neuropathy makes injury detection difficult."],
+      "context": [""]
+    },
+    {
+      "tag": "eye_care",
+      "patterns": ["Diabetic eye problems", "Diabetes vision", "Retinopathy", "Diabetes blindness", "Eye exams diabetes"],
+      "responses": ["Annual dilated eye exams, Watch for: blurred vision, floaters, dark spots, difficulty seeing at night. Diabetic retinopathy is leading cause of blindness. Early detection and treatment crucial. Control blood sugar, blood pressure, cholesterol. Laser therapy and injections available for advanced cases."],
+      "context": [""]
+    },
+    {
+      "tag": "kidney_care",
+      "patterns": ["Diabetic kidney disease", "Diabetes nephropathy", "Kidney problems diabetes", "Dialysis diabetes", "Protein in urine"],
+      "responses": ["Annual kidney function tests (creatinine, GFR, microalbumin), Control blood pressure and blood sugar, Limit protein if advanced kidney disease, Avoid NSAIDs, ACE inhibitors or ARBs may help protect kidneys, Early stages often symptomless, Advanced stages may require dialysis or transplant."],
+      "context": [""]
+    },
+    {
+      "tag": "dental_care",
+      "patterns": ["Diabetes dental care", "Gum disease diabetes", "Teeth problems diabetes", "Oral health diabetes", "Dentist diabetes"],
+      "responses": ["Higher risk for gum disease and infections, Brush twice daily with fluoride toothpaste, Floss daily, Regular dental cleanings, Tell dentist about diabetes, Control blood sugar for healing, Watch for: bleeding gums, bad breath, loose teeth, dry mouth. Gum disease can worsen blood sugar control."],
+      "context": [""]
+    },
+    {
+      "tag": "medications_oral",
+      "patterns": ["Diabetes pills", "Oral medications diabetes", "Metformin", "Diabetes drugs", "Non-insulin medications"],
+      "responses": ["Metformin: Reduces liver glucose production\nSulfonylureas: Stimulate insulin release\nDPP-4 inhibitors: Help regulate blood sugar\nSGLT2 inhibitors: Help kidneys remove glucose\nGLP-1 agonists: Slow digestion, increase insulin\nThiazolidinediones: Improve insulin sensitivity\nEach has different benefits and side effects."],
+      "context": [""]
+    },
+    {
+      "tag": "weight_management",
+      "patterns": ["Diabetes weight loss", "Obesity and diabetes", "Losing weight diabetes", "Bariatric surgery diabetes", "Weight control diabetes"],
+      "responses": ["Even 5-10% weight loss improves blood sugar control, Focus on sustainable lifestyle changes, Portion control and meal planning, Regular physical activity, Consider working with dietitian, Bariatric surgery may be option for severe obesity, Some diabetes medications cause weight gain/loss, Monitor blood sugar during weight loss."],
+      "context": [""]
+    },
+    {
+      "tag": "stress_management",
+      "patterns": ["Stress and diabetes", "Diabetes stress", "Managing stress diabetes", "Cortisol blood sugar", "Emotional eating diabetes"],
+      "responses": ["Chronic stress raises blood sugar through cortisol, Practice relaxation techniques: deep breathing, meditation, yoga, Regular exercise reduces stress, Adequate sleep is crucial, Consider counseling for diabetes distress, Social support is important, Identify stress triggers, Avoid emotional eating patterns."],
+      "context": [""]
+    },
+    {
+      "tag": "sleep_diabetes",
+      "patterns": ["Sleep and diabetes", "Diabetes sleep problems", "Sleep apnea diabetes", "Insomnia diabetes", "Blood sugar sleep"],
+      "responses": ["Poor sleep worsens insulin resistance, Sleep apnea more common in diabetes, Aim for 7-9 hours nightly, Good sleep hygiene: regular schedule, cool dark room, avoid screens before bed, High/low blood sugar can disrupt sleep, Address sleep disorders promptly, Consider continuous glucose monitor for nighttime patterns."],
+      "context": [""]
+    },
+    {
+      "tag": "alcohol_diabetes",
+      "patterns": ["Alcohol and diabetes", "Drinking with diabetes", "Beer diabetes", "Wine diabetes", "Alcohol blood sugar"],
+      "responses": ["Alcohol can cause delayed hypoglycemia up to 24 hours later, Never drink on empty stomach, Limit: 1 drink/day women, 2 drinks/day men, Choose lower carb options, Monitor blood sugar more frequently, Wear medical ID, Don't skip meals, Some medications interact with alcohol. Always discuss with doctor."],
+      "context": [""]
+    },
+    {
+      "tag": "smoking_diabetes",
+      "patterns": ["Smoking and diabetes", "Quit smoking diabetes", "Tobacco diabetes", "Cigarettes blood sugar", "Vaping diabetes"],
+      "responses": ["Smoking worsens diabetes complications: heart disease, kidney disease, poor circulation, nerve damage, slower healing. Quitting improves: blood flow, immune function, blood sugar control, complication risks. Resources: nicotine replacement, prescription medications, counseling, support groups. Benefits start immediately after quitting."],
+      "context": [""]
+    },
+    {
+      "tag": "seniors_diabetes",
+      "patterns": ["Diabetes in elderly", "Senior diabetes care", "Older adults diabetes", "Aging with diabetes", "Diabetes complications seniors"],
+      "responses": ["Higher risk of complications: heart disease, falls, cognitive decline. May need adjusted blood sugar targets, Medication management important, Regular vision/hearing checks, Fall prevention measures, Social support crucial, Consider simplified regimens, Depression screening important, Coordinate care among specialists."],
+      "context": [""]
+    },
+    {
+      "tag": "adolescent_diabetes",
+      "patterns": ["Teen diabetes", "Adolescent diabetes management", "Diabetes teenagers", "High school diabetes", "Puberty diabetes"],
+      "responses": ["Hormonal changes affect blood sugar, Increased insulin resistance during puberty, Independence vs. supervision balance, Peer pressure and social situations, Dating and diabetes disclosure, College preparation, Eating disorders risk higher, Technology can help with management, Transition to adult care planning."],
+      "context": [""]
+    },
+    {
+      "tag": "insurance_diabetes",
+      "patterns": ["Diabetes insurance", "Coverage diabetes supplies", "Health insurance diabetes", "Medicare diabetes", "Cost of diabetes care"],
+      "responses": ["Most insurance covers diabetes supplies and medications, Know your formulary (covered medications), Prior authorization may be needed, Medicare covers supplies, education, and monitoring, Shop for best prices on supplies, Patient assistance programs available, FSA/HSA can cover diabetes expenses, Document medical necessity."],
+      "context": [""]
+    },
+    {
+      "tag": "continuous_monitoring",
+      "patterns": ["CGM", "Continuous glucose monitor", "Dexcom", "FreeStyle Libre", "Real-time glucose"],
+      "responses": ["Provides real-time glucose readings, Shows trends and patterns, Reduces finger sticks, Alerts for highs/lows, Helps with tight control, Data sharing with healthcare team, Two types: real-time (CGM) and flash glucose monitoring, Most accurate when calibrated properly, Consider lifestyle and insurance coverage."],
+      "context": [""]
+    },
+    {
+      "tag": "insulin_pumps",
+      "patterns": ["Insulin pump", "Pump therapy", "Continuous insulin delivery", "Omnipod", "Medtronic pump"],
+      "responses": ["Delivers continuous insulin via catheter, More flexible meal and exercise timing, Better mimics normal insulin patterns, Requires carb counting skills, Higher upfront cost, Pump site changes every 2-3 days, Risk of ketoacidosis if pump fails, Training required, Good for people with variable schedules."],
+      "context": [""]
+    },
+    {
+      "tag": "ketoacidosis",
+      "patterns": ["DKA", "Diabetic ketoacidosis", "Ketones high", "Diabetes emergency ketones", "Acid in blood"],
+      "responses": ["⚠️ MEDICAL EMERGENCY - Call 911 immediately! Occurs when body breaks down fat for energy, producing ketones. Symptoms: nausea, vomiting, abdominal pain, rapid breathing, fruity breath odor, confusion. More common in Type 1. Causes: illness, missed insulin, stress. Prevention: never skip insulin, test ketones when sick."],
+      "context": [""]
+    },
+    {
+      "tag": "hypoglycemia_severe",
+      "patterns": ["Severe low blood sugar", "Glucagon", "Unconscious diabetes", "Severe hypoglycemia", "Emergency low sugar"],
+      "responses": ["⚠️ Blood sugar <50 mg/dL or unconsciousness - EMERGENCY! If conscious: 15g fast carbs, retest in 15 mins. If unconscious: glucagon injection, call 911, position on side. Causes: too much insulin, skipped meals, excess exercise. Prevention: regular meals, glucose tablets, medical ID, educate family/friends."],
+      "context": [""]
+    },
+    {
+      "tag": "mody_diabetes",
+      "patterns": ["MODY", "Monogenic diabetes", "Genetic diabetes", "Maturity onset diabetes young", "Inherited diabetes"],
+      "responses": ["Maturity-Onset Diabetes of the Young - genetic form affecting 1-2% of diabetes cases. Caused by single gene mutations, Often misdiagnosed as Type 1 or 2, Family history across generations, May not need insulin initially, Different types (MODY 1-14), Genetic testing available, Treatment varies by type."],
+      "context": [""]
+    },
+    {
+      "tag": "lada_diabetes",
+      "patterns": ["LADA", "Latent autoimmune diabetes adults", "Type 1.5 diabetes", "Late onset type 1", "Adult autoimmune diabetes"],
+      "responses": ["Latent Autoimmune Diabetes in Adults - slow-progressing autoimmune diabetes. Often misdiagnosed as Type 2 initially, Develops in adults over 30, Positive autoantibodies, Eventually requires insulin, GAD antibodies often present, May respond to oral medications initially, Proper diagnosis important for treatment."],
+      "context": [""]
+    },
+    {
+      "tag": "dawn_phenomenon",
+      "patterns": ["Dawn phenomenon", "Morning high blood sugar", "Dawn effect", "Early morning glucose spike", "Waking up high sugar"],
+      "responses": ["Natural rise in blood sugar between 2-8 AM due to hormone release. Normal in everyone but exaggerated in diabetes. Strategies: later long-acting insulin, bedtime snack with protein, earlier dinner, exercise after dinner, continuous glucose monitoring to track patterns. Distinguish from Somogyi effect (rebound from nighttime low)."],
+      "context": [""]
+    },
+    {
+      "tag": "honeymoon_phase",
+      "patterns": ["Honeymoon period diabetes", "Remission phase", "Partial remission", "Beta cell recovery", "Lower insulin needs"],
+      "responses": ["Period after Type 1 diagnosis when remaining beta cells still produce some insulin. Insulin needs may decrease temporarily, Can last weeks to years, More common in adults than children, Don't stop insulin completely, Monitor closely for changes, Eventually ends as autoimmune destruction continues, Gives false hope but is normal part of progression."],
+      "context": [""]
+    },
+    {
+      "tag": "artificial_pancreas",
+      "patterns": ["Closed loop system", "Artificial pancreas", "Automated insulin delivery", "Hybrid closed loop", "Smart insulin pump"],
+      "responses": ["System combining CGM, insulin pump, and algorithm to automatically adjust insulin. Currently hybrid systems - still need meal boluses, Significantly improves time in range, Reduces hypoglycemia risk, Several FDA-approved systems available, Still requires user input and monitoring, Future fully automated systems in development."],
+      "context": [""]
+    }
+  ]
+}
