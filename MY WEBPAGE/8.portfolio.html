@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Subhadip Sinha - Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #0f0f0f; color: white; overflow-x: hidden; }
+    header { height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center; position: relative; z-index: 1; }
+    h1 { font-size: 3.5rem; letter-spacing: 2px; }
+    p { font-size: 1.2rem; color: #ccc; }
+    .section { padding: 80px 10%; position: relative; }
+    h2 { margin-bottom: 40px; font-size: 2.8rem; text-align: center; position: relative; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+    .card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; backdrop-filter: blur(15px); transition: transform 0.4s ease, box-shadow 0.4s ease; }
+    .card:hover { transform: translateY(-12px) scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+    .video-container video { width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+    .skills { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .skill { background: rgba(255,255,255,0.1); padding: 15px 20px; border-radius: 50px; font-size: 1rem; transition: background 0.3s ease; }
+    .skill:hover { background: rgba(255,255,255,0.2); }
+    form input, form textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; font-size: 1rem; }
+    form button { padding: 12px 25px; background: linear-gradient(45deg, #ff9800, #ff5722); border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; color: white; transition: background 0.3s ease; }
+    form button:hover { background: linear-gradient(45deg, #ffb84d, #ff7043); }
+    canvas { position: fixed; top: 0; left: 0; z-index: 0; }
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<header>
+    <h1>Subhadip Sinha</h1>
+    <p>AI Engineer | Author | Video Editor</p>
+</header>
+<section class="section">
+    <h2>Projects</h2>
+    <div class="grid" id="projects"></div>
+</section>
+<section class="section">
+    <h2>Books</h2>
+    <div class="grid" id="books"></div>
+</section>
+<section class="section">
+    <h2>Video Editing</h2>
+    <div class="grid" id="videos"></div>
+</section>
+<section class="section">
+    <h2>Skills</h2>
+    <div class="skills">
+        <div class="skill">Machine Learning</div>
+        <div class="skill">Video Editing</div>
+        <div class="skill">Creative Writing</div>
+        <div class="skill">Web Development</div>
+        <div class="skill">3D Animation</div>
+    </div>
+</section>
+<section class="section">
+    <h2>About Me</h2>
+    <p style="text-align:center; max-width:700px; margin:auto; line-height:1.8;">I am Subhadip Sinha, a passionate AI Engineer with expertise in cutting-edge machine learning models, author of 8 books, and skilled video editor. My work combines creativity and technology to bring innovative solutions to life, whether in AI projects, literature, or cinematic edits.</p>
+</section>
+<section class="section">
+    <h2>Contact</h2>
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+    // Populate sections
+    const projectData = Array.from({length:8}, (_,i)=>`<div class='card'>Project ${i+1}</div>`);
+    document.getElementById('projects').innerHTML = projectData.join('');
+    const bookData = Array.from({length:8}, (_,i)=>`<div class='card'>Book ${i+1}</div>`);
+    document.getElementById('books').innerHTML = bookData.join('');
+    const videoData = Array.from({length:8}, (_,i)=>`<div class='video-container'><video controls src='video${i+1}.mp4'></video></div>`);
+    document.getElementById('videos').innerHTML = videoData.join('');
+
+    // Three.js Background Animation
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('bg'), alpha: true});
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 5;
+
+    const geometry = new THREE.IcosahedronGeometry(2, 1);
+    const material = new THREE.MeshStandardMaterial({color: 0xff9800, wireframe: true});
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    const light = new THREE.PointLight(0xffffff, 1);
+    light.position.set(5, 5, 5);
+    scene.add(light);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        mesh.rotation.x += 0.005;
+        mesh.rotation.y += 0.005;
+        renderer.render(scene, camera);
+    }
+    animate();
+</script>
+</body>
+</html>

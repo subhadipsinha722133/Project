@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subhadip Sinha | Portfolio</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        background-color: #0d1117;
+        color: white;
+        overflow-x: hidden;
+    }
+
+    header {
+        text-align: center;
+        padding: 100px 20px;
+    }
+
+    h1 {
+        font-size: 3rem;
+        animation: fadeInDown 1.2s ease-in-out;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        color: #00e1ff;
+        min-height: 30px;
+    }
+
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    section {
+        max-width: 900px;
+        margin: auto;
+        padding: 60px 20px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.6s ease-in-out;
+    }
+
+    section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .card {
+        background: #161b22;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        transition: transform 0.3s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background: #161b22;
+    }
+
+    a {
+        color: #00e1ff;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Hi, I'm <span style="color:#00e1ff;">Subhadip Sinha</span></h1>
+    <h2 id="typing"></h2>
+</header>
+
+<section>
+    <h2>About Me</h2>
+    <div class="card">
+        <p>I am an AI Engineer passionate about building innovative solutions using Machine Learning, IoT, and Web Technologies.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Projects</h2>
+    <div class="card">📸 AI Image Generator using Stable Diffusion</div>
+    <div class="card">📊 Fuzzy Expert System for Stock Portfolio Selection</div>
+    <div class="card">🌍 IoT-based Environmental Monitoring System</div>
+</section>
+
+<section>
+    <h2>Contact</h2>
+    <div class="card">
+        <p>Email: <a href="mailto:sinhasubhadip34@gmail.com">sinhasubhadip34@gmail.com</a></p>
+        <p>GitHub: <a href="#">github.com/subhadip</a></p>
+        <p>LinkedIn: <a href="#">linkedin.com/in/subhadip</a></p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Subhadip Sinha</p>
+</footer>
+
+<script>
+    // Typing animation
+    const text = ["AI Engineer", "Web Developer", "IoT Enthusiast"];
+    let i = 0, j = 0, currentText = "", isDeleting = false;
+
+    function typeEffect() {
+        if (i < text.length) {
+            if (!isDeleting && j <= text[i].length) {
+                currentText = text[i].substring(0, j++);
+            } else if (isDeleting && j >= 0) {
+                currentText = text[i].substring(0, j--);
+            }
+
+            document.getElementById("typing").innerHTML = currentText;
+
+            if (j === text[i].length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 1000);
+                return;
+            } else if (isDeleting && j === 0) {
+                isDeleting = false;
+                i++;
+                if (i === text.length) i = 0;
+            }
+            setTimeout(typeEffect, isDeleting ? 50 : 150);
+        }
+    }
+    typeEffect();
+
+    // Scroll animation
+    const sections = document.querySelectorAll("section");
+    window.addEventListener("scroll", () => {
+        sections.forEach(sec => {
+            const rect = sec.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 50) {
+                sec.classList.add("visible");
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

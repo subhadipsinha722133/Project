@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My 3D Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 40px 0;
+            position: relative;
+            z-index: 10;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 10;
+        }
+        
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .section-title {
+            font-size: 40px;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .projects {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        
+        .project-desc {
+            opacity: 0.8;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .project-tag {
+            background: rgba(108, 92, 231, 0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .project-link {
+            font-size: 14px;
+            color: var(--secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: rgba(0, 0, 0, 0.2);
+            margin-top: 100px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">My Portfolio</a>
+                <div class="nav-links">
+                    <a href="#projects">Projects</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div id="canvas-container"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Subhadip Sinha</h1>
+                <p>I design and develop immersive web experiences with cutting-edge 3D animations and interactive elements that captivate users.</p>
+                <a href="#projects" class="btn">View My Work</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card" data-tilt data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img src="https://source.unsplash.com/random/600x400/?webdesign,1" alt="Project 1" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">3D Product Configurator</h3>
+                        <p class="project-desc">Interactive 3D product customizer for e-commerce with real-time rendering.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Three.js</span>
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">WebGL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card" data-tilt data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img src="https://source.unsplash.com/random/600x400/?webdesign,2" alt="Project 2" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">Virtual Art Gallery</h3>
+                        <p class="project-desc">Immersive 3D gallery space showcasing digital artwork with VR support.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">A-Frame</span>
+                            <span class="project-tag">WebXR</span>
+                            <span class="project-tag">GLSL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card" data-tilt data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img src="https://source.unsplash.com/random/600x400/?webdesign,3" alt="Project 3" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">Interactive Data Visualization</h3>
+                        <p class="project-desc">3D data exploration tool with dynamic animations and user interactions.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">D3.js</span>
+                            <span class="project-tag">Three.js</span>
+                            <span class="project-tag">SVG</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card" data-tilt data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img src="https://source.unsplash.com/random/600x400/?webdesign,4" alt="Project 4" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">Architectural Walkthrough</h3>
+                        <p class="project-desc">Real-time 3D building exploration with photorealistic materials.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Blender</span>
+                            <span class="project-tag">GLTF</span>
+                            <span class="project-tag">Raytracing</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="project-card" data-tilt data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img src="https://source.unsplash.com/random/600x400/?webdesign,5" alt="Project 5" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">Game Prototype</h3>
+                        <p class="project-desc">Browser-based 3D game with physics and multiplayer support.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Babylon.js</span>
+                            <span class="project-tag">Socket.io</span>
+                            <span class="project-tag">Cannon.js</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="project-card" data-tilt data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img src="https://source.unsplash.com/random/600x400/?webdesign,6" alt="Project 6" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">AR Product Viewer</h3>
+                        <p class="project-desc">Augmented reality experience for viewing products in your space.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">WebXR</span>
+                            <span class="project-tag">8th Wall</span>
+                            <span class="project-tag">Model-viewer</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 7 -->
+                <div class="project-card" data-tilt data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img src="https://source.unsplash.com/random/600x400/?webdesign,7" alt="Project 7" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">Procedural Animation System</h3>
+                        <p class="project-desc">Dynamic character animations generated in real-time based on physics.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Three.js</span>
+                            <span class="project-tag">Oimo.js</span>
+                            <span class="project-tag">Procedural</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 8 -->
+                <div class="project-card" data-tilt data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img src="https://source.unsplash.com/random/600x400/?webdesign,8" alt="Project 8" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">Interactive Music Visualizer</h3>
+                        <p class="project-desc">3D audio-reactive experience synchronized with music playback.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Web Audio API</span>
+                            <span class="project-tag">Shaders</span>
+                            <span class="project-tag">GLSL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 9 -->
+                <div class="project-card" data-tilt data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img src="https://source.unsplash.com/random/600x400/?webdesign,9" alt="Project 9" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">3D Portfolio Template</h3>
+                        <p class="project-desc">Customizable 3D portfolio template with interactive elements.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Three.js</span>
+                            <span class="project-tag">GSAP</span>
+                            <span class="project-tag">ScrollMagic</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 10 -->
+                <div class="project-card" data-tilt data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img src="https://source.unsplash.com/random/600x400/?webdesign,10" alt="Project 10" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title">Virtual Fashion Showroom</h3>
+                        <p class="project-desc">3D environment for showcasing fashion collections with avatar try-on.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">WebGL</span>
+                            <span class="project-tag">Cloth Simulation</span>
+                            <span class="project-tag">Character Animation</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 My 3D Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Three.js 3D Animation
+        const container = document.getElementById('canvas-container');
+        
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+        
+        // Particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particleCount = 1000;
+        
+        const posArray = new Float32Array(particleCount * 3);
+        
+        for(let i = 0; i < particleCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.02,
+            color: 0xa29bfe,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        
+        // Torus Knot
+        const geometry = new THREE.TorusKnotGeometry(0.5, 0.2, 100, 16);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0x6c5ce7,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.7
+        });
+        const torusKnot = new THREE.Mesh(geometry, material);
+        scene.add(torusKnot);
+        
+        camera.position.z = 3;
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            torusKnot.rotation.x += 0.005;
+            torusKnot.rotation.y += 0.005;
+            
+            particlesMesh.rotation.y += 0.001;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Initialize VanillaTilt for project cards
+        VanillaTilt.init(document.querySelectorAll(".project-card"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2,
+        });
+    </script>
+</body>
+</html>

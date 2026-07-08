@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Creative Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #020202;
+            --secondary: #50a7bb;
+            --dark: #1a1a2e;
+            --light: #ffffff;
+            --accent: #ff7e5f;
+            --primary-color: #5d55f1;
+            --secondary-color: #4d44db;
+            --accent-color: #ff6584;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+        
+        /* 3D Animation Styles */
+        .section-3d {
+            transform-style: preserve-3d;
+            transition: transform 1s, opacity 1s;
+            opacity: 0;
+            transform: translateY(50px) rotateX(-10deg);
+        }
+        
+        .section-3d.active {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+        
+        /* Main Container */
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        /* Profile Section */
+        .profile-section {
+            flex: 1;
+            position: relative;
+        }
+        
+        .about-image {
+            position: relative;
+            transform-style: preserve-3d;
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 5px solid var(--accent);
+            border-radius: 10px;
+            z-index: -1;
+            transform: rotate(5deg);
+        }
+        
+        .about-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(2, 254, 241, 0.3);
+        }
+        
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .skills {
+            margin-top: 30px;
+        }
+        
+        .skills h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-tag {
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Cube Section */
+        .cube-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cube-image {
+            width: 100%;
+            max-width: 300px;
+            position: relative;
+            height: 300px;
+            transform-style: preserve-3d;
+            margin-bottom: 2rem;
+        }
+        
+        .cube-image .cube {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: rotateCube 20s infinite linear;
+        }
+        
+        .cube-image .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(108, 99, 255, 0.1);
+            border: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            color: var(--light);
+            backface-visibility: hidden;
+            padding: 1rem;
+        }
+        
+        .cube-image .face:nth-child(1) {
+            transform: rotateY(0deg) translateZ(150px);
+            background: rgba(255, 126, 95, 0.2);
+        }
+        .cube-image .face:nth-child(2) {
+            transform: rotateY(90deg) translateZ(150px);
+            background: rgba(80, 167, 187, 0.2);
+        }
+        .cube-image .face:nth-child(3) {
+            transform: rotateY(180deg) translateZ(150px);
+            background: rgba(93, 85, 241, 0.2);
+        }
+        .cube-image .face:nth-child(4) {
+            transform: rotateY(-90deg) translateZ(150px);
+            background: rgba(255, 101, 132, 0.2);
+        }
+        .cube-image .face:nth-child(5) {
+            transform: rotateX(90deg) translateZ(150px);
+            background: rgba(77, 68, 219, 0.2);
+        }
+        .cube-image .face:nth-child(6) {
+            transform: rotateX(-90deg) translateZ(150px);
+            background: rgba(26, 26, 46, 0.2);
+        }
+        
+        .cube-content {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .cube-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .cube-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+        
+        @keyframes rotateCube {
+            0% {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            100% {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+                padding: 80px 20px;
+                gap: 30px;
+            }
+            
+            .profile-section, .cube-section {
+                width: 100%;
+            }
+            
+            .about-image {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+            
+            .cube-image {
+                max-width: 250px;
+                height: 250px;
+            }
+            
+            .cube-image .face:nth-child(1) {
+                transform: rotateY(0deg) translateZ(125px);
+            }
+            .cube-image .face:nth-child(2) {
+                transform: rotateY(90deg) translateZ(125px);
+            }
+            .cube-image .face:nth-child(3) {
+                transform: rotateY(180deg) translateZ(125px);
+            }
+            .cube-image .face:nth-child(4) {
+                transform: rotateY(-90deg) translateZ(125px);
+            }
+            .cube-image .face:nth-child(5) {
+                transform: rotateX(90deg) translateZ(125px);
+            }
+            .cube-image .face:nth-child(6) {
+                transform: rotateX(-90deg) translateZ(125px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 60px 20px;
+            }
+            
+            .about-text h2, .cube-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cube-image {
+                max-width: 200px;
+                height: 200px;
+            }
+            
+            .cube-image .face {
+                font-size: 1rem;
+            }
+            
+            .cube-image .face:nth-child(1) {
+                transform: rotateY(0deg) translateZ(100px);
+            }
+            .cube-image .face:nth-child(2) {
+                transform: rotateY(90deg) translateZ(100px);
+            }
+            .cube-image .face:nth-child(3) {
+                transform: rotateY(180deg) translateZ(100px);
+            }
+            .cube-image .face:nth-child(4) {
+                transform: rotateY(-90deg) translateZ(100px);
+            }
+            .cube-image .face:nth-child(5) {
+                transform: rotateX(90deg) translateZ(100px);
+            }
+            .cube-image .face:nth-child(6) {
+                transform: rotateX(-90deg) translateZ(100px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 40px 15px;
+            }
+            
+            .about-image {
+                max-width: 280px;
+            }
+            
+            .cube-image {
+                max-width: 180px;
+                height: 180px;
+            }
+            
+            .cube-image .face {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+            
+            .cube-image .face:nth-child(1) {
+                transform: rotateY(0deg) translateZ(90px);
+            }
+            .cube-image .face:nth-child(2) {
+                transform: rotateY(90deg) translateZ(90px);
+            }
+            .cube-image .face:nth-child(3) {
+                transform: rotateY(180deg) translateZ(90px);
+            }
+            .cube-image .face:nth-child(4) {
+                transform: rotateY(-90deg) translateZ(90px);
+            }
+            .cube-image .face:nth-child(5) {
+                transform: rotateX(90deg) translateZ(90px);
+            }
+            .cube-image .face:nth-child(6) {
+                transform: rotateX(-90deg) translateZ(90px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Combined Profile and Cube Section -->
+    <section id="combined-section" class="section-3d">
+        <div class="main-container">
+            <!-- Profile Section -->
+            <div class="profile-section">
+                <div class="about-image">
+                    <img src="my.jpg" alt="Profile Image">
+                </div>
+                <div class="about-text">
+                    <h2>3D Artist, Author & Video Editor</h2>
+                    <p>With over 10 years of experience in the creative industry, I specialize in creating immersive 3D animations, writing educational books about digital art, and producing high-quality video content.</p>
+                    <p>My passion lies at the intersection of technology and art, where I can bring imaginative concepts to life through 3D modeling, animation, and visual storytelling.</p>
+                    
+                    <div class="skills">
+                        <h3>My Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">3D Animation</span>
+                            <span class="skill-tag">Blender</span>
+                            <span class="skill-tag">Maya</span>
+                            <span class="skill-tag">After Effects</span>
+                            <span class="skill-tag">Premiere Pro</span>
+                            <span class="skill-tag">Cinema 4D</span>
+                            <span class="skill-tag">Video Editing</span>
+                            <span class="skill-tag">Motion Graphics</span>
+                            <span class="skill-tag">Visual Effects</span>
+                            <span class="skill-tag">Creative Writing</span>
+                            <span class="skill-tag">Storyboarding</span>
+                            <span class="skill-tag">Character Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cube Section -->
+            <div class="cube-section">
+                <div class="cube-image">
+                    <div class="cube">
+                        <div class="face">3D Artist</div>
+                        <div class="face">Author</div>
+                        <div class="face">Designer</div>
+                        <div class="face">Video Editor</div>
+                        <div class="face">Animator</div>
+                        <div class="face">Storyteller</div>
+                    </div>
+                </div>
+                <div class="cube-content">
+                    <h2>Multidimensional Creativity</h2>
+                    <p>I'm a multidisciplinary creative professional with experience in 3D animation, content creation, and digital media production. My journey began with a passion for technology and storytelling.</p>
+                    <p>What sets me apart is my ability to bridge the gap between technical implementation and creative expression, creating meaningful experiences for audiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for 3D animations
+        const sections = document.querySelectorAll('.section-3d');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

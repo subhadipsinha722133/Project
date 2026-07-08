@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+<title>Subhadip Sinha | Portfolio</title>
+<style>
+    /* body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        background-color: #0d1117;
+        color: white;
+        overflow-x: hidden;
+    } */
+
+:root {
+            --primary: #5ce2e7;
+            --secondary: #9bfea6;
+            --dark: #010101;
+            --light: #f5f6fa;
+
+
+            --secondary-color: #f8e406;
+            --primary-color: #63dbff;
+            
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+    body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            
+            
+        }
+
+/* hedder */
+
+nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(39, 38, 55, 0.8);
+            backdrop-filter: blur(5px);
+            transform: translateY(0);
+            transition: transform 0.5s ease, background 0.3s;
+        }
+        
+        nav.scrolled {
+            background: rgba(47, 46, 65, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--light-color);
+            text-decoration: none;
+            transform-style: preserve-3d;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 40px;
+        }
+        
+        nav ul li {
+            list-style: none;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--light-color);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var( --secondary-color);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+/*  */
+
+
+
+    header {
+        text-align: center;
+        padding: 100px 20px;
+    }
+
+    h1 {
+        font-size: 3rem;
+        animation: fadeInDown 1.2s ease-in-out;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        color: #00e1ff;
+        min-height: 30px;
+    }
+
+header {
+            padding: 140px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 10;
+        }
+        
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+
+
+
+
+.hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+
+
+
+
+
+.btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+.btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+
+
+
+
+#canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+
+@media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+
+</style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Subhadip <span>Sinha</span></a>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#books">Books</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <!-- <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div> -->
+    </nav>
+
+
+
+
+
+<header>
+    <h1>Hi, I'm <span style="color:#00e1ff;">Subhadip Sinha</span></h1>
+    <h2 id="typing"></h2>
+</header>
+
+
+
+
+<section class="hero">
+        <div id="canvas-container"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Subhadip Sinha</h1>
+                <p>I design and develop immersive web experiences with cutting-edge 3D animations and interactive elements that captivate users.</p>
+                <a href="#projects" class="btn">View My Work</a>
+            </div>
+        </div>
+    </section>
+
+
+
+<script>
+
+
+
+// Typing Effect
+   const text = ["AIML Engineer...", "Web Developer...", "Video Editor..."];
+let i = 0, j = 0, currentText = "", isDeleting = false, isPaused = false;
+
+function typeEffect() {
+    const typingElement = document.getElementById("typing");
+    const currentString = text[i];
+    
+    // Calculate typing/deleting speed (faster when deleting)
+    const typeSpeed = isDeleting ? 30 : 100;
+    const pauseBetween = 1000;
+    
+    // Current text update
+    currentText = currentString.substring(0, j);
+    typingElement.innerHTML = currentText;
+    
+    // Add blinking cursor effect
+    typingElement.classList.add('typing-cursor');
+    
+    // Animation logic
+    if (!isDeleting && j < currentString.length) {
+        j++;
+        setTimeout(typeEffect, typeSpeed);
+    } 
+    else if (!isDeleting && j === currentString.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, pauseBetween);
+    } 
+    else if (isDeleting && j > 0) {
+        j--;
+        setTimeout(typeEffect, typeSpeed);
+    } 
+    else {
+        isDeleting = false;
+        i = (i + 1) % text.length;
+        setTimeout(typeEffect, typeSpeed / 2);
+    }
+}
+
+// Start the effect when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    typeEffect();
+    
+    // Add CSS for cursor effect
+    const style = document.createElement('style');
+    style.textContent = `
+        .typing-cursor {
+            border-right: 2px solid #fff;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: #fff; }
+        }
+    `;
+    document.head.appendChild(style);
+});
+
+
+
+
+
+   // Three.js 3D Animation
+const container = document.getElementById('canvas-container');
+
+// Scene setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+container.appendChild(renderer.domElement);
+
+// Particles
+const particlesGeometry = new THREE.BufferGeometry();
+const particleCount = 1000;
+
+const posArray = new Float32Array(particleCount * 3);
+
+for(let i = 0; i < particleCount * 3; i++) {
+    posArray[i] = (Math.random() - 0.5) * 10;
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.02,
+    color: 0xa29bfe,
+    transparent: true,
+    opacity: 0.8,
+    blending: THREE.AdditiveBlending
+});
+
+const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particlesMesh);
+
+// Torus Knot
+const geometry = new THREE.TorusKnotGeometry(0.5, 0.2, 100, 16);
+const material = new THREE.MeshBasicMaterial({ 
+    color: 0x6c5ce7,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.7
+});
+const torusKnot = new THREE.Mesh(geometry, material);
+scene.add(torusKnot);
+
+camera.position.z = 3;
+
+// Handle window resize
+function onWindowResize() {
+    // Update camera aspect ratio
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    
+    // Update renderer size
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    // Adjust particle size based on screen size
+    const particleSize = Math.min(0.02, 0.01 + (window.innerWidth * 0.00001));
+    particlesMaterial.size = particleSize;
+}
+
+// Add event listener for window resize
+window.addEventListener('resize', onWindowResize, false);
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+    
+    torusKnot.rotation.x += 0.005;
+    torusKnot.rotation.y += 0.005;
+    
+    particlesMesh.rotation.y += 0.001;
+    
+    renderer.render(scene, camera);
+}
+
+// Initial call to handle any initial sizing issues
+onWindowResize();
+animate();
+
+    
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

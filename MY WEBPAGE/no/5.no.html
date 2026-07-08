@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akil's Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #E2E8F0;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        #bg-animation-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #0F172A;
+        }
+        #bg-animation {
+            width: 100%;
+            height: 100%;
+        }
+        .content {
+            position: relative;
+            z-index: 10;
+            background-color: rgba(15, 23, 42, 0.85); /* Semi-transparent background */
+            backdrop-filter: blur(8px); /* Optional blur effect */
+        }
+        .section-header {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+        .scroll-effect {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-effect.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1E293B;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4B5563;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200">
+
+    <!-- 3D Animation Background Container -->
+    <div id="bg-animation-container">
+        <canvas id="bg-animation"></canvas>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="content min-h-screen">
+
+        <!-- Navigation Bar -->
+        <header class="sticky top-0 z-50 bg-slate-900 bg-opacity-70 backdrop-blur-md shadow-lg">
+            <nav class="container mx-auto p-4 flex justify-center space-x-6 sm:space-x-12">
+                <a href="#about" class="text-slate-200 hover:text-sky-400 transition-colors duration-300 font-semibold text-lg">About</a>
+                <a href="#skills" class="text-slate-200 hover:text-sky-400 transition-colors duration-300 font-semibold text-lg">Skills</a>
+                <a href="#projects" class="text-slate-200 hover:text-sky-400 transition-colors duration-300 font-semibold text-lg">Projects</a>
+                <a href="#books" class="text-slate-200 hover:text-sky-400 transition-colors duration-300 font-semibold text-lg">Books</a>
+                <a href="#videos" class="text-slate-200 hover:text-sky-400 transition-colors duration-300 font-semibold text-lg">Videos</a>
+                <a href="#contact" class="text-slate-200 hover:text-sky-400 transition-colors duration-300 font-semibold text-lg">Contact</a>
+            </nav>
+        </header>
+
+        <!-- About Section -->
+        <section id="about" class="min-h-screen flex items-center justify-center p-8">
+            <div class="container mx-auto max-w-4xl flex flex-col md:flex-row items-center bg-slate-800 bg-opacity-70 rounded-3xl p-8 shadow-2xl scroll-effect">
+                <div class="md:w-1/3 mb-6 md:mb-0 md:mr-8 flex justify-center">
+                    <img src="http://googleusercontent.com/file_content/0" onerror="this.onerror=null;this.src='https://placehold.co/400x400/1E293B/E2E8F0?text=Akil'" alt="Akil's Profile Photo" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-4 border-sky-400 shadow-xl transition-transform duration-500 hover:scale-105">
+                </div>
+                <div class="md:w-2/3 text-center md:text-left">
+                    <h2 class="text-4xl sm:text-5xl font-extrabold mb-4 section-header text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">
+                        Hello, I'm Subhadip Sinha
+                    </h2>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-4">
+                        I am a passionate creator who loves to build new things. As a video editor, author, and developer, I thrive on bringing ideas to life through various creative mediums. My journey has led me to explore the worlds of code, storytelling, and visual media, and I am excited to share my work with you.
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        This website is a showcase of my projects, books, and videos. I believe in continuous learning and always look for new challenges to grow my skills.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="min-h-screen flex items-center justify-center p-8">
+            <div class="container mx-auto max-w-6xl text-center scroll-effect">
+                <h2 class="text-4xl sm:text-5xl font-extrabold mb-12 section-header text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+                    My Skills
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="bg-slate-800 bg-opacity-70 p-6 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-105 hover:bg-slate-700">
+                        <div class="text-5xl mb-4 text-sky-400">🚀</div>
+                        <h3 class="text-xl font-bold mb-2">Web Development</h3>
+                        <p class="text-slate-400">Front-end and back-end expertise.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 p-6 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-105 hover:bg-slate-700">
+                        <div class="text-5xl mb-4 text-sky-400">🎬</div>
+                        <h3 class="text-xl font-bold mb-2">Video Editing</h3>
+                        <p class="text-slate-400">Proficient with professional software.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 p-6 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-105 hover:bg-slate-700">
+                        <div class="text-5xl mb-4 text-sky-400">✍️</div>
+                        <h3 class="text-xl font-bold mb-2">Creative Writing</h3>
+                        <p class="text-slate-400">Authoring books and scripts.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 p-6 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-105 hover:bg-slate-700">
+                        <div class="text-5xl mb-4 text-sky-400">🎨</div>
+                        <h3 class="text-xl font-bold mb-2">Graphic Design</h3>
+                        <p class="text-slate-400">Creating stunning visuals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="min-h-screen flex items-center justify-center p-8">
+            <div class="container mx-auto max-w-6xl text-center scroll-effect">
+                <h2 class="text-4xl sm:text-5xl font-extrabold mb-12 section-header text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">
+                    My Projects
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project placeholders (8 total) -->
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Project Title 1</h3>
+                        <p class="text-slate-400">A brief description of my first project. It was a great learning experience.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Project Title 2</h3>
+                        <p class="text-slate-400">This project focused on modern web design principles and responsive layouts.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Project Title 3</h3>
+                        <p class="text-slate-400">I developed this application to solve a specific problem for a client.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Project Title 4</h3>
+                        <p class="text-slate-400">An experimental project exploring 3D graphics and user interaction.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Project Title 5</h3>
+                        <p class="text-slate-400">This was a collaborative effort with a team of other talented developers.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Project Title 6</h3>
+                        <p class="text-slate-400">A personal project to learn a new programming language and framework.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Project Title 7</h3>
+                        <p class="text-slate-400">The goal of this project was to optimize performance and user experience.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Project Title 8</h3>
+                        <p class="text-slate-400">My final project for a course, showcasing everything I had learned.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Books Section -->
+        <section id="books" class="min-h-screen flex items-center justify-center p-8">
+            <div class="container mx-auto max-w-6xl text-center scroll-effect">
+                <h2 class="text-4xl sm:text-5xl font-extrabold mb-12 section-header text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500">
+                    My Books
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Book placeholders (8 total) -->
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="text-7xl mb-4">📚</div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Book Title 1</h3>
+                        <p class="text-slate-400">Genre: Sci-Fi</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="text-7xl mb-4">📚</div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Book Title 2</h3>
+                        <p class="text-slate-400">Genre: Fantasy</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="text-7xl mb-4">📚</div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Book Title 3</h3>
+                        <p class="text-slate-400">Genre: Thriller</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="text-7xl mb-4">📚</div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Book Title 4</h3>
+                        <p class="text-slate-400">Genre: Romance</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="text-7xl mb-4">📚</div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Book Title 5</h3>
+                        <p class="text-slate-400">Genre: Biography</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="text-7xl mb-4">📚</div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Book Title 6</h3>
+                        <p class="text-slate-400">Genre: Self-help</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="text-7xl mb-4">📚</div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Book Title 7</h3>
+                        <p class="text-slate-400">Genre: Mystery</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="text-7xl mb-4">📚</div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Book Title 8</h3>
+                        <p class="text-slate-400">Genre: History</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section id="videos" class="min-h-screen flex items-center justify-center p-8">
+            <div class="container mx-auto max-w-6xl text-center scroll-effect">
+                <h2 class="text-4xl sm:text-5xl font-extrabold mb-12 section-header text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500">
+                    My Video Edits
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Video placeholders (8 total) -->
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="aspect-video bg-slate-700 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-5xl text-slate-400">▶️</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Video Title 1</h3>
+                        <p class="text-slate-400">A short video edit for a marketing campaign.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="aspect-video bg-slate-700 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-5xl text-slate-400">▶️</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Video Title 2</h3>
+                        <p class="text-slate-400">Edited a full-length vlog episode.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="aspect-video bg-slate-700 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-5xl text-slate-400">▶️</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Video Title 3</h3>
+                        <p class="text-slate-400">A music video with special effects and color grading.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="aspect-video bg-slate-700 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-5xl text-slate-400">▶️</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Video Title 4</h3>
+                        <p class="text-slate-400">Edited a series of educational videos.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="aspect-video bg-slate-700 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-5xl text-slate-400">▶️</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Video Title 5</h3>
+                        <p class="text-slate-400">A highlight reel for a gaming channel.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="aspect-video bg-slate-700 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-5xl text-slate-400">▶️</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Video Title 6</h3>
+                        <p class="text-slate-400">A corporate promotional video for a startup.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="aspect-video bg-slate-700 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-5xl text-slate-400">▶️</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Video Title 7</h3>
+                        <p class="text-slate-400">A short film that I edited from raw footage.</p>
+                    </div>
+                    <div class="bg-slate-800 bg-opacity-70 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-slate-700">
+                        <div class="aspect-video bg-slate-700 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-5xl text-slate-400">▶️</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-sky-400">Video Title 8</h3>
+                        <p class="text-slate-400">A social media video series with dynamic text animations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="min-h-screen flex items-center justify-center p-8">
+            <div class="container mx-auto max-w-2xl text-center scroll-effect">
+                <h2 class="text-4xl sm:text-5xl font-extrabold mb-12 section-header text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500">
+                    Contact Me
+                </h2>
+                <form id="contact-form" class="bg-slate-800 bg-opacity-70 rounded-3xl p-8 shadow-2xl">
+                    <div class="mb-6 text-left">
+                        <label for="name" class="block text-slate-300 text-lg font-semibold mb-2">Name</label>
+                        <input type="text" id="name" name="name" class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400 transition-all duration-300" placeholder="Your Name" required>
+                    </div>
+                    <div class="mb-6 text-left">
+                        <label for="email" class="block text-slate-300 text-lg font-semibold mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400 transition-all duration-300" placeholder="Your Email" required>
+                    </div>
+                    <div class="mb-6 text-left">
+                        <label for="message" class="block text-slate-300 text-lg font-semibold mb-2">Message</label>
+                        <textarea id="message" name="message" rows="4" class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400 transition-all duration-300" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-400">
+                        Send Message
+                    </button>
+                    <div id="form-status" class="mt-4 text-center hidden"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="p-4 text-center text-slate-500">
+            &copy; 2024 Akil. All Rights Reserved.
+        </footer>
+    </div>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- JavaScript for 3D animation and scroll effects -->
+    <script>
+        window.onload = function() {
+            // --- 3D Animation Setup ---
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-animation'), antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            camera.position.z = 5;
+
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            const pointLight = new THREE.PointLight(0xffffff, 1);
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
+
+            // Create a custom geometric shape
+            const geometry = new THREE.IcosahedronGeometry(2, 0);
+            const material = new THREE.MeshPhysicalMaterial({
+                color: 0x6EE2F5,
+                metalness: 0.8,
+                roughness: 0.1,
+                clearcoat: 1,
+                clearcoatRoughness: 0.1,
+                transparent: true,
+                opacity: 0.7,
+                envMap: null // Will be set later
+            });
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            // A second, smaller object for more visual interest
+            const geometry2 = new THREE.TorusKnotGeometry(0.7, 0.3, 100, 16);
+            const material2 = new THREE.MeshBasicMaterial({ color: 0x5463FF, wireframe: true });
+            const mesh2 = new THREE.Mesh(geometry2, material2);
+            mesh2.position.set(0, 0, -2);
+            scene.add(mesh2);
+
+            // Mouse interaction for camera
+            let mouseX = 0, mouseY = 0;
+            let windowHalfX = window.innerWidth / 2;
+            let windowHalfY = window.innerHeight / 2;
+
+            document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+            function onDocumentMouseMove(event) {
+                mouseX = (event.clientX - windowHalfX);
+                mouseY = (event.clientY - windowHalfY);
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Animate objects
+                mesh.rotation.x += 0.005;
+                mesh.rotation.y += 0.005;
+                mesh2.rotation.x += 0.01;
+                mesh2.rotation.y += 0.007;
+
+                // Animate camera position based on mouse
+                camera.position.x += (mouseX * 0.001 - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY * 0.001 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                renderer.render(scene, camera);
+            }
+
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                windowHalfX = window.innerWidth / 2;
+                windowHalfY = window.innerHeight / 2;
+            }
+
+            window.addEventListener('resize', onWindowResize, false);
+
+            animate(); // Start the animation loop
+
+
+            // --- Scroll Animation Effects ---
+            const scrollElements = document.querySelectorAll('.scroll-effect');
+            const observerOptions = {
+                root: null,
+                threshold: 0.2, // Trigger when 20% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // observer.unobserve(entry.target); // Uncomment to animate only once
+                    } else {
+                        // Optional: remove visible class when it leaves the viewport
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, observerOptions);
+
+            scrollElements.forEach(el => observer.observe(el));
+
+
+            // --- Smooth Scrolling for Nav Links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+
+            // --- Contact Form Handling (for demonstration) ---
+            const contactForm = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                console.log('Form Submitted!');
+                console.log('Name:', name);
+                console.log('Email:', email);
+                console.log('Message:', message);
+
+                formStatus.textContent = 'Thank you for your message! I will get back to you shortly.';
+                formStatus.className = 'mt-4 text-center text-green-400 font-bold block';
+                contactForm.reset();
+            });
+        };
+    </script>
+</body>
+</html>
