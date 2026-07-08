@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #f5f7fa;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+        }
+        
+        .app-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .form-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .preview-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .add-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        
+        .add-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .remove-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .remove-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .resume {
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resume-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .resume-header h3 {
+            font-size: 28px;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+        
+        .resume-header p {
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .resume-section {
+            margin-bottom: 25px;
+        }
+        
+        .resume-section h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .item {
+            margin-bottom: 20px;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .item-title {
+            font-weight: 600;
+        }
+        
+        .item-subtitle {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-tag {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .download-btn {
+            margin-top: 20px;
+            background-color: #27ae60;
+        }
+        
+        .download-btn:hover {
+            background-color: #219653;
+        }
+        
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Resume Builder</h1>
+            <p>Create a professional resume in minutes</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="app-container">
+            <div class="form-section">
+                <h2>Personal Information</h2>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Subhadip Sinha">
+                </div>
+                <div class="form-group">
+                    <label for="profession">Profession</label>
+                    <input type="text" id="profession" placeholder="AIML Engineer">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="sinhasubhadip34@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" placeholder="1234567890">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" placeholder="123 Main St, City, Country">
+                </div>
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn</label>
+                    <input type="url" id="linkedin" placeholder="https://linkedin.com/in/username">
+                </div>
+                <div class="form-group">
+                    <label for="github">GitHub</label>
+                    <input type="url" id="github" placeholder="https://github.com/username">
+                </div>
+                <div class="form-group">
+                    <label for="summary">Professional Summary</label>
+                    <textarea id="summary" placeholder="Briefly describe your professional background and skills"></textarea>
+                </div>
+                
+                <h2>Education</h2>
+                <div id="education-container">
+                    <div class="education-section section">
+                        <div class="form-group">
+                            <label for="degree">Degree</label>
+                            <input type="text" class="degree" placeholder="Bachelor of Science in Computer Science">
+                        </div>
+                        <div class="form-group">
+                            <label for="university">University</label>
+                            <input type="text" class="university" placeholder="University of Example">
+                        </div>
+                        <div class="form-group">
+                            <label for="educationDate">Date</label>
+                            <input type="text" class="educationDate" placeholder="2015 - 2019">
+                        </div>
+                        <div class="form-group">
+                            <label for="educationDescription">Description</label>
+                            <textarea class="educationDescription" placeholder="Relevant coursework, honors, etc."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button id="add-education" class="add-btn">Add Education</button>
+                
+                <h2>Work Experience</h2>
+                <div id="experience-container">
+                    <div class="experience-section section">
+                        <div class="form-group">
+                            <label for="jobTitle">Job Title</label>
+                            <input type="text" class="jobTitle" placeholder="Software Developer">
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" class="company" placeholder="Tech Company Inc.">
+                        </div>
+                        <div class="form-group">
+                            <label for="workDate">Date</label>
+                            <input type="text" class="workDate" placeholder="2019 - Present">
+                        </div>
+                        <div class="form-group">
+                            <label for="workDescription">Description</label>
+                            <textarea class="workDescription" placeholder="Your responsibilities and achievements"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button id="add-experience" class="add-btn">Add Experience</button>
+                
+                <h2>Skills</h2>
+                <div id="skills-container">
+                    <div class="form-group">
+                        <label for="skills">Add Skills (comma separated)</label>
+                        <input type="text" id="skills" placeholder="JavaScript, HTML, CSS, React">
+                    </div>
+                </div>
+                
+                <h2>Projects</h2>
+                <div id="projects-container">
+                    <div class="project-section section">
+                        <div class="form-group">
+                            <label for="projectName">Project Name</label>
+                            <input type="text" class="projectName" placeholder="E-commerce Website">
+                        </div>
+                        <div class="form-group">
+                            <label for="projectDescription">Description</label>
+                            <textarea class="projectDescription" placeholder="Project details and your contributions"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button id="add-project" class="add-btn">Add Project</button>
+                
+                <button id="generate-resume" class="btn btn-block">Generate Resume</button>
+            </div>
+            
+            <div class="preview-section">
+                <h2>Resume Preview</h2>
+                <div id="resume-preview" class="resume">
+                    <div class="resume-header">
+                        <h3 id="preview-name">Your Name</h3>
+                        <p id="preview-profession">Your Profession</p>
+                        <div class="contact-info" id="preview-contact">
+                            <!-- Contact info will be added here -->
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <h4>Professional Summary</h4>
+                        <p id="preview-summary">Brief professional summary highlighting your experience and skills.</p>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <h4>Education</h4>
+                        <div id="preview-education">
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title">Degree Name</span>
+                                    <span class="item-date">Date</span>
+                                </div>
+                                <div class="item-subtitle">University Name</div>
+                                <p class="item-description">Description of your education.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <h4>Work Experience</h4>
+                        <div id="preview-experience">
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title">Job Title</span>
+                                    <span class="item-date">Date</span>
+                                </div>
+                                <div class="item-subtitle">Company Name</div>
+                                <p class="item-description">Description of your work experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <h4>Skills</h4>
+                        <div class="skills-list" id="preview-skills">
+                            <span class="skill-tag">Sample Skill</span>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <h4>Projects</h4>
+                        <div id="preview-projects">
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title">Project Name</span>
+                                </div>
+                                <p class="item-description">Project description and details.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="download-resume" class="btn btn-block download-btn">Download Resume</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const generateBtn = document.getElementById('generate-resume');
+            const downloadBtn = document.getElementById('download-resume');
+            const addEducationBtn = document.getElementById('add-education');
+            const addExperienceBtn = document.getElementById('add-experience');
+            const addProjectBtn = document.getElementById('add-project');
+            
+            // Generate Resume
+            generateBtn.addEventListener('click', function() {
+                updateResumePreview();
+            });
+            
+            // Add Education Section
+            addEducationBtn.addEventListener('click', function() {
+                const container = document.getElementById('education-container');
+                const newSection = document.createElement('div');
+                newSection.className = 'education-section section';
+                newSection.innerHTML = `
+                    <button class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+                    <div class="form-group">
+                        <label for="degree">Degree</label>
+                        <input type="text" class="degree" placeholder="Bachelor of Science in Computer Science">
+                    </div>
+                    <div class="form-group">
+                        <label for="university">Collega</label>
+                        <input type="text" class="university" placeholder="University of Example">
+                    </div>
+                    <div class="form-group">
+                        <label for="educationDate">Date</label>
+                        <input type="text" class="educationDate" placeholder="2022 - 2026">
+                    </div>
+                    <div class="form-group">
+                        <label for="educationDescription">Description</label>
+                        <textarea class="educationDescription" placeholder="Relevant coursework, honors, etc."></textarea>
+                    </div>
+                `;
+                container.appendChild(newSection);
+            });
+            
+            // Add Experience Section
+            addExperienceBtn.addEventListener('click', function() {
+                const container = document.getElementById('experience-container');
+                const newSection = document.createElement('div');
+                newSection.className = 'experience-section section';
+                newSection.innerHTML = `
+                    <button class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input type="text" class="jobTitle" placeholder="Software Developer">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" class="company" placeholder="Tech Company Inc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="workDate">Date</label>
+                        <input type="text" class="workDate" placeholder="2022 - Present">
+                    </div>
+                    <div class="form-group">
+                        <label for="workDescription">Description</label>
+                        <textarea class="workDescription" placeholder="Your responsibilities and achievements"></textarea>
+                    </div>
+                `;
+                container.appendChild(newSection);
+            });
+            
+            // Add Project Section
+            addProjectBtn.addEventListener('click', function() {
+                const container = document.getElementById('projects-container');
+                const newSection = document.createElement('div');
+                newSection.className = 'project-section section';
+                newSection.innerHTML = `
+                    <button class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+                    <div class="form-group">
+                        <label for="projectName">Project Name</label>
+                        <input type="text" class="projectName" placeholder="AIML Web Page">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription">Description</label>
+                        <textarea class="projectDescription" placeholder="Project details and your contributions"></textarea>
+                    </div>
+                `;
+                container.appendChild(newSection);
+            });
+            
+            // Download Resume
+            downloadBtn.addEventListener('click', function() {
+                const resumeContent = document.getElementById('resume-preview');
+                const opt = {
+                    margin: 10,
+                    filename: 'my-resume.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+                
+                // Use html2pdf library to generate PDF
+                // You'll need to include html2pdf library in your project
+                // html2pdf().from(resumeContent).set(opt).save();
+                
+                alert('PDF generation would normally work here with the html2pdf library included.');
+            });
+            
+            // Update Resume Preview
+            function updateResumePreview() {
+                // Personal Information
+                document.getElementById('preview-name').textContent = document.getElementById('fullName').value || 'Your Name';
+                document.getElementById('preview-profession').textContent = document.getElementById('profession').value || 'Your Profession';
+                document.getElementById('preview-summary').textContent = document.getElementById('summary').value || 'Brief professional summary highlighting your experience and skills.';
+                
+                // Contact Information
+                const contactInfo = document.getElementById('preview-contact');
+                contactInfo.innerHTML = '';
+                
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const address = document.getElementById('address').value;
+                const linkedin = document.getElementById('linkedin').value;
+                const github = document.getElementById('github').value;
+                
+                if (email) contactInfo.appendChild(createContactItem('envelope', email));
+                if (phone) contactInfo.appendChild(createContactItem('phone', phone));
+                if (address) contactInfo.appendChild(createContactItem('map-marker-alt', address));
+                if (linkedin) contactInfo.appendChild(createContactItem('linkedin', 'LinkedIn', linkedin));
+                if (github) contactInfo.appendChild(createContactItem('github', 'GitHub', github));
+                
+                // Education
+                const educationContainer = document.getElementById('preview-education');
+                educationContainer.innerHTML = '';
+                
+                const educationSections = document.querySelectorAll('.education-section');
+                educationSections.forEach(section => {
+                    const degree = section.querySelector('.degree').value;
+                    const university = section.querySelector('.university').value;
+                    const date = section.querySelector('.educationDate').value;
+                    const description = section.querySelector('.educationDescription').value;
+                    
+                    if (degree || university || date || description) {
+                        const educationItem = document.createElement('div');
+                        educationItem.className = 'item';
+                        educationItem.innerHTML = `
+                            <div class="item-header">
+                                <span class="item-title">${degree || 'Degree Name'}</span>
+                                <span class="item-date">${date || 'Date'}</span>
+                            </div>
+                            <div class="item-subtitle">${university || 'University Name'}</div>
+                            <p class="item-description">${description || 'Description of your education.'}</p>
+                        `;
+                        educationContainer.appendChild(educationItem);
+                    }
+                });
+                
+                // Experience
+                const experienceContainer = document.getElementById('preview-experience');
+                experienceContainer.innerHTML = '';
+                
+                const experienceSections = document.querySelectorAll('.experience-section');
+                experienceSections.forEach(section => {
+                    const jobTitle = section.querySelector('.jobTitle').value;
+                    const company = section.querySelector('.company').value;
+                    const date = section.querySelector('.workDate').value;
+                    const description = section.querySelector('.workDescription').value;
+                    
+                    if (jobTitle || company || date || description) {
+                        const experienceItem = document.createElement('div');
+                        experienceItem.className = 'item';
+                        experienceItem.innerHTML = `
+                            <div class="item-header">
+                                <span class="item-title">${jobTitle || 'Job Title'}</span>
+                                <span class="item-date">${date || 'Date'}</span>
+                            </div>
+                            <div class="item-subtitle">${company || 'Company Name'}</div>
+                            <p class="item-description">${description || 'Description of your work experience.'}</p>
+                        `;
+                        experienceContainer.appendChild(experienceItem);
+                    }
+                });
+                
+                // Skills
+                const skillsContainer = document.getElementById('preview-skills');
+                skillsContainer.innerHTML = '';
+                
+                const skillsInput = document.getElementById('skills').value;
+                if (skillsInput) {
+                    const skills = skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill);
+                    skills.forEach(skill => {
+                        const skillTag = document.createElement('span');
+                        skillTag.className = 'skill-tag';
+                        skillTag.textContent = skill;
+                        skillsContainer.appendChild(skillTag);
+                    });
+                } else {
+                    skillsContainer.innerHTML = '<span class="skill-tag">Sample Skill</span>';
+                }
+                
+                // Projects
+                const projectsContainer = document.getElementById('preview-projects');
+                projectsContainer.innerHTML = '';
+                
+                const projectSections = document.querySelectorAll('.project-section');
+                projectSections.forEach(section => {
+                    const projectName = section.querySelector('.projectName').value;
+                    const description = section.querySelector('.projectDescription').value;
+                    
+                    if (projectName || description) {
+                        const projectItem = document.createElement('div');
+                        projectItem.className = 'item';
+                        projectItem.innerHTML = `
+                            <div class="item-header">
+                                <span class="item-title">${projectName || 'Project Name'}</span>
+                            </div>
+                            <p class="item-description">${description || 'Project description and details.'}</p>
+                        `;
+                        projectsContainer.appendChild(projectItem);
+                    }
+                });
+            }
+            
+            function createContactItem(icon, text, link = null) {
+                const span = document.createElement('span');
+                const iconElem = document.createElement('i');
+                iconElem.className = `fas fa-${icon}`;
+                span.appendChild(iconElem);
+                
+                if (link) {
+                    const a = document.createElement('a');
+                    a.href = link;
+                    a.target = '_blank';
+                    a.textContent = text;
+                    span.appendChild(a);
+                } else {
+                    span.appendChild(document.createTextNode(` ${text}`));
+                }
+                
+                return span;
+            }
+        });
+    </script>
+    
+    <!-- Include html2pdf library for PDF generation -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> -->
+</body>
+</html>
