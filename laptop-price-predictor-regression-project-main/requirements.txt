@@ -1,0 +1,28 @@
+# Core Data Science & ML Libraries
+numpy
+pandas
+scikit-learn
+scipy
+
+# Machine Learning Models
+xgboost
+
+# Web Application
+streamlit
+
+# Data Visualization
+matplotlib
+seaborn
+plotly
+
+# Image Processing
+Pillow
+
+# Utilities
+joblib
+threadpoolctl
+
+# Development & Testing
+pytest
+black
+flake8
